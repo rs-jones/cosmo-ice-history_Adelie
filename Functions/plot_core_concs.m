@@ -128,7 +128,7 @@ function core_plot = plot_core_concs(sample_data,plot_ts,x_lim,y_lim)
   if (nargin == 4 && ~isempty(y_lim))
       a1.YLim = y_lim;
   else
-      a1.YLim(1) = 0; % Default - set top depth to zero (i.e. the surface)
+      a1.YLim(1) = -0.1; % Default - set top depth to zero (i.e. the surface)
   end
   if (nargin == 3 && ~isempty(x_lim))
       a1.XLim = x_lim;

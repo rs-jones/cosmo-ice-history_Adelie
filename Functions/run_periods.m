@@ -127,12 +127,12 @@ if any(ismember(sample_type,"core"))
         end
     end
     out.core_data = core_data;
-    if isfield(sample_data_core.CC,"Be10")
-        out.core_density = mean(sample_data_core.CC.Be10(:,6),'omitmissing');
+    if isfield(sample_data_core.CC,"Be10Al26")
+        out.core_density = mean(sample_data_core.CC.Be10Al26(:,6),'omitmissing');
     elseif isfield(sample_data_core.CC,"C14")
         out.core_density = mean(sample_data_core.CC.C14(:,6),'omitmissing');
     else
-        out.core_density = mean(sample_data_core.CC.Al26(:,6),'omitmissing');
+        error('Sample data are missing.')
     end
 end
 
@@ -191,12 +191,12 @@ if any(ismember(sample_type,"transect"))
         end
     end
     out.transect_data = transect_data;
-    if isfield(sample_data_transect.CC,"Be10")
-        out.transect_density = mean(sample_data_transect.CC.Be10(:,6),'omitmissing');
+    if isfield(sample_data_transect.CC,"Be10Al26")
+        out.transect_density = mean(sample_data_transect.CC.Be10Al26(:,6),'omitmissing');
     elseif isfield(sample_data_transect.CC,"C14")
         out.transect_density = mean(sample_data_transect.CC.C14(:,6),'omitmissing');
     else
-        out.transect_density = mean(sample_data_transect.CC.Al26(:,6),'omitmissing');
+        error('Sample data are missing.')
     end
 end
 
