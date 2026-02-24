@@ -66,23 +66,31 @@ function sample_data = get_pars(sample_data,scaling_model,max_depth)
   
   % Get sample-specific parameters
   for s = 1:n_samples
-  
+
       % Extract the sample parameters from a sample_data vector
       sample_data.sp1026{s} = samppars1026(sample_data.CC.Be10Al26(s,:));
-      sample_data.sp14{s} = samppars14(sample_data.CC.C14(s,:));
-      
+      if isfield('sample_data.CC','C14')
+          sample_data.sp14{s} = samppars14(sample_data.CC.C14(s,:));
+      end
+
       % Get the scale factors
       sample_data.sf1026{s} = scalefacs1026(sample_data.sp1026{s});
-      sample_data.sf14{s} = scalefacs14(sample_data.sp14{s});
-      
+      if isfield('sample_data.CC','C14')
+          sample_data.sf14{s} = scalefacs14(sample_data.sp14{s});
+      end
+
       % Computed parameters
       sample_data.cp1026{s} = comppars1026_mod(sample_data.pp,sample_data.sp1026{s},sample_data.sf1026{s},maxdepth_gcm2); % MODIFIED to use Balco's muon model
-      sample_data.cp14{s} = comppars14_mod(sample_data.pp,sample_data.sp14{s},sample_data.sf14{s},maxdepth_gcm2); % MODIFIED to use Balco's muon model
-      
+      if isfield('sample_data.CC','C14')
+          sample_data.cp14{s} = comppars14_mod(sample_data.pp,sample_data.sp14{s},sample_data.sf14{s},maxdepth_gcm2); % MODIFIED to use Balco's muon model
+      end
+
       % Go ahead and produce contemporary scaling factors
       sample_data.sf1026{s}.currentsf = getcurrentsf(sample_data.sf1026{s},0,scaling,'albe');
-      sample_data.sf14{s}.currentsf = getcurrentsf(sample_data.sf14{s},0,scaling,'c');
-      
+      if isfield('sample_data.CC','C14')
+          sample_data.sf14{s}.currentsf = getcurrentsf(sample_data.sf14{s},0,scaling,'c');
+      end
+
   end
   
   % Append scaling model

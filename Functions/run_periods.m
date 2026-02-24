@@ -83,8 +83,10 @@ if any(ismember(sample_type,"core"))
         core_data{a}.cp10 = sample_data_core.cp1026(a);
         core_data{a}.sf26 = sample_data_core.sf1026(a);
         core_data{a}.cp26 = sample_data_core.cp1026(a);
-        core_data{a}.sf14 = sample_data_core.sf14(a);
-        core_data{a}.cp14 = sample_data_core.cp14(a);
+        if isfield('sample_data_core','sf14')
+            core_data{a}.sf14 = sample_data_core.sf14(a);
+            core_data{a}.cp14 = sample_data_core.cp14(a);
+        end
         core_data{a}.top_z_cm = sample_data_core.s{a}.top_z;
         core_data{a}.bottom_z_cm = sample_data_core.s{a}.bottom_z;
         core_data{a}.top_z_gcm2 = sample_data_core.s{a}.top_z_gcm2;
